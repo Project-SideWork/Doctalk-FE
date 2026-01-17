@@ -1,9 +1,7 @@
 import axios from "axios";
 
-// const BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
 const axiosInstanceNoHeader = axios.create({
-  baseURL: "https://docktalk.co.kr/api",
+  baseURL: "http://180.210.81.232:8080/api",
   // baseURL: BASE_URL,
 });
 
@@ -20,7 +18,7 @@ axiosInstanceNoHeader.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 axiosInstanceNoHeader.interceptors.response.use(
@@ -54,7 +52,7 @@ axiosInstanceNoHeader.interceptors.response.use(
         }
         // refresh 요청 실행
         refreshPromise = plainAxios
-          .post("https://docktalk.co.kr/api/token/refresh", null, {
+          .post("http://180.210.81.232:8080/api/token/refresh", null, {
             headers: {
               Authorization: `Bearer ${refreshToken}`,
             },
@@ -89,7 +87,7 @@ axiosInstanceNoHeader.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export { axiosInstanceNoHeader };
