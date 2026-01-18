@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MemberList from "./MemberList";
 import AddMemberForm from "./AddMemberForm";
-import { inviteMembersToProject } from "../../../api/projectApi";
+import { inviteMembersToProject } from "../../../apis/projectApi";
 
 const MemberManager = ({ projectId, members, setMembers }) => {
   const [newMember, setNewMember] = useState({

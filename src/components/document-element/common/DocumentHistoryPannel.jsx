@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import BackIcon from "../../../assets/icons/DocIcons/Back.svg";
-import InfoIcon from "../../../assets/icons/DocIcons/Info.svg";
-import { fetchDocumentLogs } from "../../../api/documentApi";
+import BackIcon from "assets/icons/DocIcons/Back.svg";
+import InfoIcon from "assets/icons/DocIcons/Info.svg";
+import { fetchDocumentLogs } from "apis/documentApi";
 
 export default function DocumentHistoryPanel({ documentId, onClose }) {
   const [logs, setLogs] = useState([]);
@@ -63,7 +63,7 @@ export default function DocumentHistoryPanel({ documentId, onClose }) {
             className="p-3 rounded-[6px] text-[#C9CBCE] text-sm font-normal line-through"
           >
             {oldP}
-          </div>
+          </div>,
         );
       } else if (!oldP && newP) {
         // 새로 추가된 문단
@@ -73,7 +73,7 @@ export default function DocumentHistoryPanel({ documentId, onClose }) {
             className="p-3 rounded-[6px] bg-[#F3F4F6] text-gray-800 text-sm font-normal"
           >
             {newP}
-          </div>
+          </div>,
         );
       } else if (oldP && newP && oldP !== newP) {
         // 수정된 문단 -> 삭제 블록 + 추가 블록 렌더링
@@ -83,7 +83,7 @@ export default function DocumentHistoryPanel({ documentId, onClose }) {
             className="p-3 rounded-[6px] text-[#C9CBCE] text-sm font-normal line-through"
           >
             {oldP}
-          </div>
+          </div>,
         );
         blocks.push(
           <div
@@ -91,7 +91,7 @@ export default function DocumentHistoryPanel({ documentId, onClose }) {
             className="p-3 rounded bg-[#F3F4F6] text-[#1F2937] text-sm font-normal"
           >
             {newP}
-          </div>
+          </div>,
         );
       } else if (oldP && newP && oldP === newP) {
         // 그대로인 문단은 표시 X
@@ -152,7 +152,7 @@ export default function DocumentHistoryPanel({ documentId, onClose }) {
                   <div>
                     {renderParagraphDiff(
                       log.oldContent?.content,
-                      log.newContent?.content
+                      log.newContent?.content,
                     )}
                   </div>
                 </div>

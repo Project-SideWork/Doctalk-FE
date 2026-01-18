@@ -5,7 +5,7 @@ import InProgressColumn from "../../../components/workboard-element/InProgressCo
 import CompletedColumn from "../../../components/workboard-element/CompletedColumn";
 import useTaskColumn from "../../../hooks/useTaskColumn";
 import { useOutletContext } from "react-router-dom";
-import { fetchProject } from "../../../api/projectApi";
+import { fetchProject } from "../../../apis/projectApi";
 import { DragDropContext } from "@hello-pangea/dnd";
 
 const WorkBoard = () => {

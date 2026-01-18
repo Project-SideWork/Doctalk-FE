@@ -10,7 +10,7 @@ import {
   correctText,
   summarizeText,
   updateDocumentStatus,
-} from "../../../api/documentApi";
+} from "../../../apis/documentApi";
 import SummaryFloatingButton from "../../../components/document-element/common/SummaryFloatingButton";
 import ProfileBlue from "../../../assets/icons/Profile/ProfileBlue";
 import AiSummaryPanel from "../../../components/document-element/common/AiSummaryPanel";

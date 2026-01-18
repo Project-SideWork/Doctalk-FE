@@ -1,4 +1,4 @@
-import { axiosInstanceNoHeader } from "../apis/axiosInstance";
+import { axiosInstanceNoHeader } from "./axiosInstance";
 
 // ✅ 프로젝트 세부 내용 조회
 export const fetchProject = async (projectId) => {
@@ -25,7 +25,7 @@ export const inviteMembersToProject = async ({ projectId, email }) => {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     return res.data;
@@ -40,7 +40,7 @@ export const updateProject = async (
   projectId,
   projectName,
   description,
-  imageId = null
+  imageId = null,
 ) => {
   try {
     const res = await axiosInstanceNoHeader.put(
@@ -54,13 +54,13 @@ export const updateProject = async (
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
     return res.data;
   } catch (error) {
     console.error(
       "프로젝트 업데이트 실패:",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
     throw error;
   }
@@ -115,13 +115,13 @@ export const fetchDocumentsByDateAsc = async (projectId) => {
       "/document/load/list/date-asc",
       {
         params: { projectId },
-      }
+      },
     );
     return res.data.result;
   } catch (error) {
     console.error(
       "❌ 문서 정렬 목록 조회 실패:",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
     throw error;
   }
@@ -131,7 +131,7 @@ export const fetchDocumentsByDateAsc = async (projectId) => {
 export const removeProjectUser = async (projectId, email) => {
   try {
     const res = await axiosInstanceNoHeader.delete(
-      `/project/${projectId}/user/${email}`
+      `/project/${projectId}/user/${email}`,
     );
     return res.data.result;
   } catch (error) {

@@ -5,13 +5,13 @@ import {
   fetchProject,
   updateProjectAuthorities,
   removeProjectUser,
-} from "../../../api/projectApi";
+} from "../../../apis/projectApi";
 
 const MemberList = ({ projectId, members, setMembers }) => {
   // 강퇴
   const handleRemove = async (email) => {
     const confirmDelete = window.confirm(
-      `${email} 님을 정말 프로젝트에서 강퇴하시겠습니까?`
+      `${email} 님을 정말 프로젝트에서 강퇴하시겠습니까?`,
     );
     if (!confirmDelete) return; // 취소하면 종료
 
@@ -28,7 +28,7 @@ const MemberList = ({ projectId, members, setMembers }) => {
           name: user.name,
           email: user.email,
           role: user.role,
-        }))
+        })),
       );
     } catch (err) {
       alert("강퇴 실패");
@@ -55,7 +55,7 @@ const MemberList = ({ projectId, members, setMembers }) => {
           name: user.name,
           email: user.email,
           role: user.role,
-        }))
+        })),
       );
       alert("유저의 권한이 변경됐습니다!");
     } catch (err) {

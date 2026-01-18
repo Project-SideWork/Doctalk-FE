@@ -1,6 +1,6 @@
 import DocumentItem from "./DocumentItem";
 import ControlsAltOn from "../../../assets/icons/ControlsAlt/ControlsAltOn";
-import { fetchDocumentsByDateAsc } from "../../../api/projectApi";
+import { fetchDocumentsByDateAsc } from "../../../apis/projectApi";
 import { useState } from "react";
 
 const DocumentList = ({ projectId, setDocuments, documents, onDelete }) => {

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import ProjectInfo from "../../../components/settings-element/project-settings/ProjectInfo";
 import MemberManager from "../../../components/settings-element/member-management/MemberManager";
-import { fetchProject, updateProject } from "../../../api/projectApi";
+import { fetchProject, updateProject } from "../../../apis/projectApi";
 import { useOutletContext } from "react-router-dom";
-import { uploadFile } from "../../../api/taskApi";
+import { uploadFile } from "../../../apis/taskApi";
 
 const Settings = () => {
   const { projectId } = useOutletContext();
@@ -29,7 +29,7 @@ const Settings = () => {
             name: user.name,
             email: user.email,
             role: user.role,
-          }))
+          })),
         );
       } catch (err) {
         console.error("프로젝트 정보 불러오기 실패", err);
@@ -56,7 +56,7 @@ const Settings = () => {
         projectId,
         projectName,
         projectDescription,
-        finalCoverImage
+        finalCoverImage,
       );
 
       alert("프로젝트 정보가 저장되었습니다.");

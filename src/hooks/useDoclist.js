@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchDocumentList, deleteDocument } from "../api/documentApi";
+import { fetchDocumentList, deleteDocument } from "apis/documentApi";
 
 // 문서 리스트 관리 로직
 const useDoclist = (projectId) => {
@@ -27,7 +27,7 @@ const useDoclist = (projectId) => {
 
   // 검색 필터링
   const filteredDocuments = documents.filter((doc) =>
-    doc.title.toLowerCase().includes(searchItem.toLowerCase())
+    doc.title.toLowerCase().includes(searchItem.toLowerCase()),
   );
 
   // 로컬에서 즉시 리스트를 업데이트 -> UX 향상

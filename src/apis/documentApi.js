@@ -1,4 +1,4 @@
-import { axiosInstanceNoHeader } from "../apis/axiosInstance";
+import { axiosInstanceNoHeader } from "./axiosInstance";
 
 // 문서 개별 조회 API
 export const fetchDocumentById = async (documentId) => {
@@ -23,7 +23,7 @@ export const fetchDocumentList = async (projectId) => {
   } catch (error) {
     console.error(
       "문서 목록 불러오기 실패:",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
     throw new Error("문서 목록을 불러오는 데 실패했습니다.");
   }
@@ -99,13 +99,13 @@ export const fetchDocumentLogs = async (documentId, page = 1, size = 5) => {
       `/document/logs/${documentId}`,
       {
         params: { page, size },
-      }
+      },
     );
     return res.data.result;
   } catch (error) {
     console.error(
       "히스토리 불러오기 실패:",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
     throw error;
   }
@@ -121,7 +121,7 @@ export const updateDocumentStatus = async (documentId, status) => {
   } catch (error) {
     console.error(
       "문서 상태 변경 실패:",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
     throw error;
   }

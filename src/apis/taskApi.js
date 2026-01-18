@@ -1,4 +1,4 @@
-import { axiosInstanceNoHeader } from "../apis/axiosInstance";
+import { axiosInstanceNoHeader } from "./axiosInstance";
 
 // ✅ 작업 목록 조회
 export const fetchTaskList = async (projectId) => {
@@ -36,7 +36,7 @@ export const createVersion = async (versionData, fileInfo = null) => {
   try {
     const res = await axiosInstanceNoHeader.post(
       `/task/version/save${query}`,
-      versionData
+      versionData,
     );
     return res.data.result;
   } catch (error) {
@@ -68,7 +68,7 @@ export const getTaskDetails = async (taskId) => {
   } catch (error) {
     console.error(
       "❌ 작업 세부 조회 실패:",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
     throw error;
   }
@@ -94,7 +94,7 @@ export const changeTaskStatus = async (taskId, status) => {
       {},
       {
         params: { taskId, status },
-      }
+      },
     );
     return res.data;
   } catch (error) {
@@ -130,7 +130,7 @@ export const uploadFile = async (file) => {
   } catch (error) {
     console.error(
       "❌ 파일 업로드 실패:",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
     throw error;
   }
@@ -150,7 +150,7 @@ export const fetchFileBlob = async (fileId) => {
   } catch (error) {
     console.error(
       "❌ 파일 다운로드 실패:",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
     throw error;
   }

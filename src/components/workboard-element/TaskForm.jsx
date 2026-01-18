@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ProfileBlue from "../../assets/icons/Profile/ProfileBlue";
 import StatusSelect from "../Status/StatusSelect";
-import { deleteFile, getTaskDetails, fetchFileBlob } from "../../api/taskApi";
+import { deleteFile, getTaskDetails, fetchFileBlob } from "../../apis/taskApi";
 import { FileIcon } from "../../assets/icons/FileIcon/FileIcon";
 import useTaskColumn from "../../hooks/useTaskColumn";
 
