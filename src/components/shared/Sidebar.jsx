@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import PlusOff from "../../../assets/icons/Plus/PlusOff";
-import ArrowRightOff from "../../../assets/icons/ArrowRight/ArrowRightOff";
-import { axiosInstanceNoHeader } from "../../../apis/axiosInstance";
+import PlusOff from "../../assets/icons/Plus/PlusOff";
+import ArrowRightOff from "../../assets/icons/ArrowRight/ArrowRightOff";
+import { axiosInstanceNoHeader } from "../../apis/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({

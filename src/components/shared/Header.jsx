@@ -3,7 +3,7 @@ import Logo from "../../assets/icons/Logo/Logo";
 import SidebarOn from "../../assets/icons/Sidebar/SidebarOn";
 import HomeOn from "../../assets/icons/Home/HomeOn";
 import BellOn from "../../assets/icons/Bell/BellOn";
-import Button from "../Button/Button";
+import Button from "./Button";
 import PersonOn from "../../assets/icons/Person/PersonOn";
 import UserIdCard from "../UserIdCard/UserIdCard";
 import { axiosInstanceNoHeader } from "../../apis/axiosInstance";
@@ -12,7 +12,7 @@ import { useNotifications } from "../../contexts/NotificationContext";
 import { useNavigate } from "react-router-dom";
 import { Menu } from "lucide-react";
 
-const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
+const Header = ({ sidebarOpen, setSidebarOpen }) => {
   const navigate = useNavigate();
   const [UserIdCardOpen, setUserIdCardOpen] = useState(false);
   const { notifications, setNotifications } = useNotifications();
@@ -231,4 +231,4 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
   );
 };
 
-export default Navbar;
+export default Header;

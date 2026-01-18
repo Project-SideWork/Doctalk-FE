@@ -1,7 +1,7 @@
 import React, { use } from "react";
 import CircleOkOn from "../../assets/icons/CircleOk/CircleOkOn";
 import CancelOn from "../../assets/icons/Cancel/CancelOn";
-import Button from "../Button/Button";
+import Button from "./Button";
 
 const Input = ({
   type,
