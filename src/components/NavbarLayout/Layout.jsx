@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Navbar from "../Navbar/Navbar";
 import CreateProjectModal from "../CreateProjectModal/CreateProjectModal";
 import { Sidebar } from "lucide-react";
+import Header from "components/common/Header";
 
 const Layout = ({ children, onProjectCreated }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -33,7 +33,7 @@ const Layout = ({ children, onProjectCreated }) => {
         </div>
       )}
       <div className="relative flex flex-col w-full h-screen bg-gray-50">
-        <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
         {sidebarOpen && (
           <>

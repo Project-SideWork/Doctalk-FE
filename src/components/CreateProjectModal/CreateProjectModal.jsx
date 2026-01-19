@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CloseOn from "../../assets/icons/Close/CloseOn";
-import Input from "../Input/Input";
-import Button from "../Button/Button";
+import Input from "../common/Input";
+import Button from "../common/Button";
 import { axiosInstanceNoHeader } from "../../apis/axiosInstance";
 
 const CreateProjectModal = ({
@@ -141,7 +141,7 @@ const CreateProjectModal = ({
                       className="cursor-pointer"
                       onClick={() =>
                         setMemberEmailList(
-                          memberEmailList.filter((e) => e !== email)
+                          memberEmailList.filter((e) => e !== email),
                         )
                       }
                     >

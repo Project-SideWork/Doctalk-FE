@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CloseOn from "../../assets/icons/Close/CloseOn";
-import Input from "../../components/Input/Input";
-import Button from "../../components/Button/Button";
+import Input from "../../components/common/Input";
+import Button from "../../components/common/Button";
 import { axiosInstanceNoHeader } from "../../apis/axiosInstance";
 import Layout from "../../components/NavbarLayout/Layout";
 import { useNavigate } from "react-router-dom";

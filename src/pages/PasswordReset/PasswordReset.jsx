@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../../components/NavbarLayout/Layout";
-import Button from "../../components/Button/Button";
-import Input from "../../components/Input/Input";
+import Button from "../../components/common/Button";
+import Input from "../../components/common/Input";
 import CloseOn from "../../assets/icons/Close/CloseOn";
 import { axiosInstanceNoHeader } from "../../apis/axiosInstance";
 import { useNavigate } from "react-router-dom";
@@ -31,7 +31,7 @@ const PasswordReset = () => {
 
       const res = await axiosInstanceNoHeader.put(
         "/mypage/password/new",
-        payload
+        payload,
       );
       alert("비밀번호가 재설정되었습니다.");
       navigate("/login");
