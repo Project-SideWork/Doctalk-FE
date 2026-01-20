@@ -1,6 +1,6 @@
 import Project from "../pages/project/Project";
 import VideoRoom from "../pages/video/VideoRoom";
-import RootLayout from "../layout/root-layout";
+import RootLayout from "../layout/RootLayout";
 import DoctalkMain from "../pages/home/DoctalkMain";
 import Login from "../pages/auth/Login";
 import Signup from "../pages/auth/Signup";
