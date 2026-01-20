@@ -1,6 +1,6 @@
 import React from "react";
 import UserIdCard from "../../components/UserIdCard/UserIdCard";
-import Calender from "../../components/Calender/Calender";
+import Calender from "../../components/calender/Calender";
 import Layout from "../../components/NavbarLayout/Layout";
 
 const Mypage = () => {
