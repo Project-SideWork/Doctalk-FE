@@ -1,14 +1,14 @@
-import Project from "../pages/wireframe-project/Project";
-import VideoRoom from "../pages/wireframe-videoroom/VideoRoom";
+import Project from "../pages/project/Project";
+import VideoRoom from "../pages/video/VideoRoom";
 import RootLayout from "../layout/root-layout";
-import DoctalkMain from "../pages/doctalkMain/DoctalkMain";
-import Login from "../pages/login/Login";
-import Signup from "../pages/Signup/Signup";
-import Mypage from "../pages/Mypage/Mypage";
-import PasswordReset from "../pages/PasswordReset/PasswordReset";
-import ProjectRouter from "../pages/wireframe-project/ProjectRouter";
+import DoctalkMain from "../pages/home/DoctalkMain";
+import Login from "../pages/auth/Login";
+import Signup from "../pages/auth/Signup";
+import Mypage from "../pages/auth/Mypage";
+import PasswordReset from "../pages/auth/PasswordReset";
+import ProjectRouter from "../pages/project/ProjectRouter";
 import VideoConference from "../components/VideoConference";
-import DocumentCreatePage from "../pages/wireframe-project/document-page/DocumentCreatePage";
+import DocumentCreatePage from "../pages/project/document/DocumentCreatePage";
 
 const Router = [
   {

@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../../components/Navbar/Navbar";
 import UserIdCard from "../../components/UserIdCard/UserIdCard";
 import Calender from "../../components/Calender/Calender";
 import Layout from "../../components/NavbarLayout/Layout";
@@ -11,7 +10,6 @@ const Mypage = () => {
         <div className="w-full">
           <UserIdCard />
         </div>
-
         <Calender />
       </div>
     </Layout>
