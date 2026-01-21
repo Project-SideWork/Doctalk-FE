@@ -37,21 +37,22 @@ const calcDday = (yyyyMmDd) => {
 const ScheduleListPreview = ({ projectId }) => {
   const [schedules, setSchedules] = useState([]);
   const navigate = useNavigate();
-  const handleCardClick = (projectId) => {
-    navigate(`/project/workboard/${projectId}`);
-  };
 
-  const fetchSchedules = async () => {
-    if (!projectId) return;
-    try {
-      const res = await axiosInstanceNoHeader.get("/task/list/deadline");
-      setSchedules(res.data.result || []);
-    } catch (e) {
-      console.log("일정 불러오기 실패~!\n", e);
-    }
+  const handleCardClick = (clickedProjectId) => {
+    navigate(`/project/workboard/${clickedProjectId}`);
   };
 
   useEffect(() => {
+    const fetchSchedules = async () => {
+      if (!projectId) return;
+      try {
+        const res = await axiosInstanceNoHeader.get("/task/list/deadline");
+        setSchedules(res.data.result || []);
+      } catch (e) {
+        console.log("일정 불러오기 실패~!\n", e);
+      }
+    };
+
     fetchSchedules();
   }, [projectId]);
 
@@ -61,6 +62,7 @@ const ScheduleListPreview = ({ projectId }) => {
         const lastContent =
           schedule.versionHistory?.[schedule.versionHistory.length - 1]
             ?.content || "";
+
         const isSameDeadline =
           idx > 0 && schedules[idx - 1].deadline === schedule.deadline;
 
@@ -73,7 +75,6 @@ const ScheduleListPreview = ({ projectId }) => {
               />
             ) : (
               <>
-                {/* D-day 라벨 + 날짜 */}
                 <div className="flex items-center gap-1 mt-4">
                   {calcDday(schedule.deadline) < 0 ? (
                     <span className="p-1 font-semibold text-sm sm:text-base text-[#e40505]">
@@ -98,7 +99,6 @@ const ScheduleListPreview = ({ projectId }) => {
                   </span>
                 </div>
 
-                {/* 일정 카드 */}
                 <div className="mt-2">
                   <ScheduleCard
                     schedule={{ ...schedule, content: lastContent }}
