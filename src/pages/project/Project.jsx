@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, useParams } from "react-router-dom";
-import ProjectTabs from "../../components/project-tabs/ProjectTabs";
-import Layout from "../../components/NavbarLayout/Layout";
+import ProjectTabs from "../../components/project/ProjectTabs";
+import Layout from "../../components/home/Layout";
 
 const Project = () => {
   const { projectId } = useParams();

@@ -1,7 +1,7 @@
 import React from "react";
 import useWebRTC from "../../hooks/useWebRTC";
-import VideoGrid from "../../components/videoroom-element/VideoGrid";
-import ControlBar from "../../components/videoroom-element/ControlBar";
+import VideoGrid from "../../components/video/VideoGrid";
+import ControlBar from "../../components/video/ControlBar";
 
 const VideoRoom = () => {
   // roomId는 필요에 따라 설정 (여기선 "test-room")

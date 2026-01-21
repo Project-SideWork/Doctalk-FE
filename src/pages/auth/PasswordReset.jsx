@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Layout from "../../components/NavbarLayout/Layout";
+import Layout from "../../components/home/Layout";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
 import CloseOn from "../../assets/icons/Close/CloseOn";

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import ProjectInfo from "../../../components/settings-element/project-settings/ProjectInfo";
-import MemberManager from "../../../components/settings-element/member-management/MemberManager";
+import ProjectInfo from "../../../components/settings/meta/ProjectInfo";
+import MemberManager from "../../../components/settings/members/MemberManager";
 import { fetchProject, updateProject } from "../../../apis/projectApi";
 import { useOutletContext } from "react-router-dom";
 import { uploadFile } from "../../../apis/taskApi";

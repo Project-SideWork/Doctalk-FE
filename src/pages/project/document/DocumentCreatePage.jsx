@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { EditorContent } from "@tiptap/react";
-import EditNavbar from "../../../components/document-element/create/edit-navbar/EditNavbar";
+import EditNavbar from "../../../components/document/editor/EditNavbar";
 import useDocumentEditor from "../../../hooks/useDocumentEditor";
 import useDocumentSocket from "../../../hooks/useDocumentSocket";
 import useDocSync from "../../../hooks/useDocSync";
@@ -11,10 +11,10 @@ import {
   summarizeText,
   updateDocumentStatus,
 } from "../../../apis/documentApi";
-import SummaryFloatingButton from "../../../components/document-element/common/SummaryFloatingButton";
+import SummaryFloatingButton from "../../../components/document/ai/SummaryFloatingButton";
 import ProfileBlue from "../../../assets/icons/Profile/ProfileBlue";
-import AiSummaryPanel from "../../../components/document-element/common/AiSummaryPanel";
-import DocumentHistoryPanel from "../../../components/document-element/common/DocumentHistoryPannel";
+import AiSummaryPanel from "../../../components/document/ai/AiSummaryPanel";
+import DocumentHistoryPanel from "../../../components/document/list/DocumentHistoryPannel";
 
 const DocumentCreatePage = () => {
   const userName = localStorage.getItem("userName");

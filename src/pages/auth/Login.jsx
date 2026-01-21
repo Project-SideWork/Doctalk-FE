@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CloseOn from "../../assets/icons/Close/CloseOn";
 import Button from "../../components/common/Button";
 import { axiosInstanceNoHeader } from "../../apis/axiosInstance";
-import Layout from "../../components/NavbarLayout/Layout";
+import Layout from "../../components/home/Layout";
 import Input from "../../components/common/Input";
 import { useNavigate } from "react-router-dom";
 

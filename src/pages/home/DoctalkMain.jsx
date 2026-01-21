@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ScheduleListPreview from "../../components/ScheduleListPreview/ScheduleListPreview";
-import ProjectListPreview from "../../components/ProjectListPreview/ProjectListPreview";
-import Layout from "../../components/NavbarLayout/Layout";
+import ScheduleListPreview from "../../components/calender/schedule/ScheduleListPreview";
+import ProjectListPreview from "../../components/home/ProjectListPreview";
+import Layout from "../../components/home/Layout";
 import { axiosInstanceNoHeader } from "../../apis/axiosInstance";
 import { useNavigate } from "react-router-dom";
 

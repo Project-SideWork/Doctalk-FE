@@ -5,7 +5,7 @@ import HomeOn from "../../assets/icons/Home/HomeOn";
 import BellOn from "../../assets/icons/Bell/BellOn";
 import Button from "./Button";
 import PersonOn from "../../assets/icons/Person/PersonOn";
-import UserIdCard from "../UserIdCard/UserIdCard";
+import UserIdCard from "../home/UserIdCard";
 import { axiosInstanceNoHeader } from "../../apis/axiosInstance";
 import useNotificationSocket from "../../hooks/useNotificationSocket";
 import { useNotifications } from "../../contexts/NotificationContext";

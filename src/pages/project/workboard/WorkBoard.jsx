@@ -1,8 +1,8 @@
 // WorkBoard.jsx
 import React, { useEffect, useState } from "react";
-import TodoColumn from "../../../components/workboard-element/TodoColumn";
-import InProgressColumn from "../../../components/workboard-element/InProgressColumn";
-import CompletedColumn from "../../../components/workboard-element/CompletedColumn";
+import TodoColumn from "../../../components/workboard/column/TodoColumn";
+import InProgressColumn from "../../../components/workboard/column/InProgressColumn";
+import CompletedColumn from "../../../components/workboard/column/CompletedColumn";
 import useTaskColumn from "../../../hooks/useTaskColumn";
 import { useOutletContext } from "react-router-dom";
 import { fetchProject } from "../../../apis/projectApi";

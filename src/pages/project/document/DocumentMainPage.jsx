@@ -1,7 +1,7 @@
 import useDoclist from "../../../hooks/useDoclist";
-import DocumentControl from "../../../components/document-element/common/DocumentControl";
-import DocumentList from "../../../components/document-element/common/DocumentList";
-import AddDocumentButton from "../../../components/document-element/create/AddDocumentButton";
+import DocumentControl from "../../../components/document/controls/DocumentControl";
+import DocumentList from "../../../components/document/list/DocumentList";
+import AddDocumentButton from "../../../components/document/editor/AddDocumentButton";
 import { useOutletContext } from "react-router-dom";
 
 const DocumentMainPage = () => {
