@@ -1,14 +1,14 @@
-import React, { useMemo } from "react";
-import NextAltOn from "../../../assets/icons/NextAlt/NextAltOn";
-import PreviousAltOn from "../../../assets/icons/PreviousAlt/PreviousAltOn";
-import Italic from "../../../assets/icons/DocIcons/Italic.svg";
-import AlignCenter from "../../../assets/icons/DocIcons/AlignCenter.svg";
-import AlignLeft from "../../../assets/icons/DocIcons/AlignL.svg";
-import AlignRight from "../../../assets/icons/DocIcons/AlignR.svg";
-import Justify from "../../../assets/icons/DocIcons/Justify.svg";
-import UnderLine from "../../../assets/icons/DocIcons/Underline.svg";
-import DocMinus from "../../../assets/icons/DocIcons/DocMinus.svg";
-import DocPlus from "../../../assets/icons/DocIcons/DocPlus.svg";
+import React from "react";
+import NextAltOn from "assets/icons/NextAlt/NextAltOn";
+import PreviousAltOn from "assets/icons/PreviousAlt/PreviousAltOn";
+import Italic from "assets/icons/DocIcons/Italic.svg";
+import AlignCenter from "assets/icons/DocIcons/AlignCenter.svg";
+import AlignLeft from "assets/icons/DocIcons/AlignL.svg";
+import AlignRight from "assets/icons/DocIcons/AlignR.svg";
+import Justify from "assets/icons/DocIcons/Justify.svg";
+import UnderLine from "assets/icons/DocIcons/Underline.svg";
+import DocMinus from "assets/icons/DocIcons/DocMinus.svg";
+import DocPlus from "assets/icons/DocIcons/DocPlus.svg";
 import ColorPickerDropdown from "./ColorPickerDropdown";
 
 const Divider = ({ className = "" }) => (
@@ -19,13 +19,14 @@ const Divider = ({ className = "" }) => (
 );
 
 const EditorToolbar = ({ editor }) => {
+  if (!editor) return null;
   // 현재 폰트 크기(px)
-  const currentSize = useMemo(() => {
-    const v = editor.getAttributes("textStyle")?.fontSize;
+  const v = editor.getAttributes("textStyle")?.fontSize;
+  const currentSize = (() => {
     if (!v) return 16;
     const n = Number(String(v).replace(/px|rem/i, ""));
     return Number.isFinite(n) ? n : 16;
-  }, [editor.state]);
+  })();
 
   const setPx = (n) => editor.chain().focus().setFontSize(`${n}px`).run();
   const dec = () => setPx(Math.max(8, currentSize - 1));
