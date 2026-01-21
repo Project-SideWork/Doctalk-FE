@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { DrawerIcon } from "../../../assets/icons/index";
 import ProfileBlue from "../../../assets/icons/Profile/ProfileBlue";
 import ProfileYellow from "../../../assets/icons/Profile/ProfileYellow";
-import Status from "../../Status/Status";
+import Status from "../../common/Status";
 
 const DocumentItem = ({
   projectId,

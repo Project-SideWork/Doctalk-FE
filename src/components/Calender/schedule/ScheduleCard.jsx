@@ -1,5 +1,5 @@
 import React from "react";
-import PersonOn from "../../assets/icons/Person/PersonOn";
+import PersonOn from "../../../assets/icons/Person/PersonOn";
 
 const ScheduleCard = ({ schedule, onClick }) => {
   // 버전 히스토리의 가장 최근 요소

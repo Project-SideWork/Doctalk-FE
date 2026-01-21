@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CreateProjectModal from "../CreateProjectModal/CreateProjectModal";
+import CreateProjectModal from "../project/CreateProjectModal";
 import { Sidebar } from "lucide-react";
 import Header from "components/common/Header";
 

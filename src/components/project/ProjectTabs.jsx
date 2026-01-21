@@ -1,5 +1,5 @@
 import { NavLink, useParams } from "react-router-dom";
-import { DocumentIcon, SettingsIcon, WorkBoardIcon } from "../../assets/icons/";
+import { DocumentIcon, SettingsIcon, WorkBoardIcon } from "../../assets/icons";
 
 const ProjectTabs = () => {
   const { projectId } = useParams(); // ⬅️ URL에서 projectId 동적 추출

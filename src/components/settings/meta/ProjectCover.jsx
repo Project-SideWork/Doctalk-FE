@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import defaultCover from "../../../assets/image/defaultCover.png";
 import { fetchFileImage } from "../../../apis/projectApi";
 import { uploadFile } from "../../../apis/taskApi";
+import defaultCover from "assets/image/defaultCover.png";
 
 const ProjectCoverUploader = ({ coverImage, setCoverImage }) => {
   const fileInputRef = useRef();

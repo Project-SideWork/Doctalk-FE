@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ScheduleCard from "./ScheduleCard";
-import { axiosInstanceNoHeader } from "../../apis/axiosInstance";
+import { axiosInstanceNoHeader } from "../../../apis/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
 const weekdays = [

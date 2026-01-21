@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import ArrowLeftOn from "../../../../assets/icons/ArrowLeft/ArrowLeftOn";
-import PersonOn from "../../../../assets/icons/Person/PersonOn";
-import VectorOn from "../../../../assets/icons/Vector/VectorOn";
-import EditorToolbar from "../EditorToolbar";
-import Status from "../../../Status/Status";
+import ArrowLeftOn from "../../../assets/icons/ArrowLeft/ArrowLeftOn";
+import PersonOn from "../../../assets/icons/Person/PersonOn";
+import VectorOn from "../../../assets/icons/Vector/VectorOn";
+import EditorToolbar from "./EditorToolbar";
+import Status from "../../common/Status";
 import { Share2 } from "lucide-react";
 
 const EditNavbar = ({

@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
-import TaskCard from "./TaskCard";
-import { Modal } from "../index";
-import PlusOn from "../../assets/icons/Plus/PlusOn";
-import PlusHover from "../../assets/icons/Plus/PlusHover";
-import TaskForm from "./TaskForm";
-import { Droppable, Draggable } from "@hello-pangea/dnd"; // ✅ 추가
+import TaskCard from "../TaskCard";
+import PlusOn from "../../../assets/icons/Plus/PlusOn";
+import PlusHover from "../../../assets/icons/Plus/PlusHover";
+import TaskForm from "../TaskForm";
+import { Droppable, Draggable } from "@hello-pangea/dnd";
+import Modal from "components/common/Modal";
 
 const initialTask = (projectId) => ({
   projectId,
