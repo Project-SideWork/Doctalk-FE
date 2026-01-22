@@ -20,7 +20,6 @@ const TaskForm = ({
     loadTaskDetails,
     saveTaskAfterFileDelete,
     saveTaskWithFile,
-    autoSaveTask,
   } = useTaskColumn(projectId);
 
   const [openDropdown, setOpenDropdown] = useState(null); // "status" | "coworker" | null
@@ -76,11 +75,6 @@ const TaskForm = ({
         coworkers: next, // UI 표시용
         editors: next, // 저장용
       };
-
-      // UI 반영
-      if (updatedTask.taskId) {
-        setTimeout(() => autoSaveTask(updatedTask), 0);
-      }
       return updatedTask;
     });
   };
