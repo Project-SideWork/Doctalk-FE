@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createDocument, fetchDocumentById } from "../api/documentApi";
+import { createDocument, fetchDocumentById } from "apis/documentApi";
 
 // 문서 불러오기 + 문서 상태 관리 + 저장로직
 const useDocState = ({

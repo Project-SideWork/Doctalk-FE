@@ -8,7 +8,7 @@ import {
   fetchVersionList,
   changeTaskStatus,
   uploadFile,
-} from "../api/taskApi";
+} from "apis/taskApi";
 
 const useTaskColumn = (projectId) => {
   const [todoList, setTodoList] = useState([]);
@@ -31,7 +31,7 @@ const useTaskColumn = (projectId) => {
 
       // 중복 제거 + coworkers를 editors로 보정
       const uniqueTasks = Array.from(
-        new Map(result.map((t) => [t.taskId || t.id, t])).values()
+        new Map(result.map((t) => [t.taskId || t.id, t])).values(),
       ).map((task) => ({
         ...task,
         taskId: task.id || task.taskId,
@@ -54,19 +54,19 @@ const useTaskColumn = (projectId) => {
           } catch (err) {
             console.error(
               `버전 목록 불러오기 실패 (taskId: ${task.taskId})`,
-              err
+              err,
             );
             return { ...task, attachmentList: [] };
           }
-        })
+        }),
       );
 
       setTodoList(tasksWithAttachments.filter((t) => t.status === "PENDING"));
       setInProgressList(
-        tasksWithAttachments.filter((t) => t.status === "PROGRESS")
+        tasksWithAttachments.filter((t) => t.status === "PROGRESS"),
       );
       setCompletedList(
-        tasksWithAttachments.filter((t) => t.status === "COMPLETED")
+        tasksWithAttachments.filter((t) => t.status === "COMPLETED"),
       );
 
       return tasksWithAttachments;
