@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CreateProjectModal from "../project/CreateProjectModal";
-import { Sidebar } from "lucide-react";
 import Header from "components/common/Header";
+import Sidebar from "components/common/Sidebar";
 
 const Layout = ({ children, onProjectCreated }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
