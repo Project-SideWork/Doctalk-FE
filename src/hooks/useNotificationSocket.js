@@ -3,7 +3,7 @@ import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import { getValidAccessToken } from "../apis/getValidAccessToken";
 
-const SOCKET_URL = "https://docktalk.co.kr/api/socket/notification/wss";
+const SOCKET_URL = "http://180.210.81.232:8080/api/socket/notification/wss";
 const SUB_PATH = (email) => `/sub/notification/${email}`;
 
 const useNotificationSocket = ({ userEmail, onMessage }) => {
@@ -56,7 +56,7 @@ const useNotificationSocket = ({ userEmail, onMessage }) => {
                 });
               }
             },
-            { Authorization: `Bearer ${token}` }
+            { Authorization: `Bearer ${token}` },
           );
         },
       });
