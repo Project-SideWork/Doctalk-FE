@@ -17,7 +17,7 @@ const Input = ({
   errmsg,
 }) => {
   return (
-    <div className="w-full h-full flex flex-col justify-start items-start gap-1">
+    <div className="w-full h-full flex flex-col justify-start items-start gap-2">
       <div className="w-full justify-start text-gray-800 text-base font-semibold font-['Palanquin']">
         {title}
       </div>

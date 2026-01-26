@@ -156,7 +156,7 @@ const DocumentCreatePage = () => {
   });
 
   // 타이핑 중인지 체크
-  const { isTypingRef, isComposingRef } = useDocSync(editor, {
+  const { isTypingRef } = useDocSync(editor, {
     title,
     status,
     documentId,
@@ -179,7 +179,7 @@ const DocumentCreatePage = () => {
     if (!isEditMode) return; // 새 문서 작성이면 소켓 열지 않음
     connect();
     return () => disconnect();
-  }, [isEditMode, documentId]);
+  }, [isEditMode, connect, disconnect]);
 
   return (
     <div className="relative flex flex-col h-screen bg-gray-50">
