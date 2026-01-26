@@ -139,3 +139,27 @@ export const removeProjectUser = async (projectId, email) => {
     throw error;
   }
 };
+
+// ✅ 프로젝트 등록
+export const registerProject = async (payload) => {
+  try {
+    const res = await axiosInstanceNoHeader.post("/project/register", payload);
+    return res.data;
+  } catch (error) {
+    console.error("프로젝트 등록 실패:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+// ✅ 이메일 유효성 체크(서버에 존재하는 유저인지 등)
+export const checkInviteEmail = async (email) => {
+  try {
+    const res = await axiosInstanceNoHeader.get("/project/invite", {
+      params: { email },
+    });
+    return res.data;
+  } catch (error) {
+    console.error("초대 실패:", error.response?.data || error.message);
+    throw error;
+  }
+};
