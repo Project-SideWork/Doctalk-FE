@@ -39,9 +39,63 @@ export const checkProjectIssues = async (projectId) => {
 export const checkProjectEvent = async (projectId) => {
   try {
     const res = await axiosInstanceNoHeader.get(`/github/event/${projectId}`);
+    console.log("test: ", res.data.result);
     return res.data.result;
   } catch (error) {
     console.error("조회 실패:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+// 조직 내 신규 레포 생성
+export const createNewRepo = async (projectId) => {
+  try {
+    const res = await axiosInstanceNoHeader.post(`/github/event/`);
+    return res.data.result;
+  } catch (error) {
+    console.error("생성 실패:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+// 레포 PR 리뷰 통계
+export const checkRepoStats = async ({ org, repo, prCount = 10 }) => {
+  try {
+    const res = await axiosInstanceNoHeader.get("/github/repo/stats", {
+      params: { org, repo, prCount },
+    });
+    return res.data.result;
+  } catch (error) {
+    console.error("조회 실패:", error.message);
+    throw error;
+  }
+};
+
+// 리뷰 코멘트 목록 조회
+export const fetchReviewComments = async ({ org, repo }) => {
+  try {
+    const res = await axiosInstanceNoHeader.get(
+      "/github/repo/reviews/comments",
+      {
+        params: { org, repo },
+      },
+    );
+    return res.data.result;
+  } catch (error) {
+    console.error("리뷰 코멘트 조회 실패:", error.message);
+    throw error;
+  }
+};
+
+// 레포의 PR 목록 조회
+export const fetchRepoPrList = async ({ org, repo }) => {
+  try {
+    const res = await axiosInstanceNoHeader.get("/github/prs", {
+      params: { org, repo },
+    });
+    return res.data.result;
+  } catch (error) {
+    console.error("PR 목록 조회 실패:", error.response?.data || error.message);
     throw error;
   }
 };
