@@ -16,16 +16,36 @@ export default function DashboardView({
   orgs,
 }) {
   return (
-    <div className="pb-6">
-      <div className="grid grid-cols-3 gap-4">
-        <GithubStatsCard stats={stats} />
-        <RequestedPrCard requestedCount={requestedList?.count ?? 0} />
-        <RepoReviewStatsCard repoStats={repoStats} />
-        <RepoEventsCard events={events} />
-        <ReviewCommentsCard comments={comments} />
-        <PrListCard prList={prList} />
+    <div className="pb-6 font-[Livvic]">
+      <div className="grid grid-cols-12 gap-4 items-stretch auto-rows-fr">
+        {/* 상단 */}
+        <div className="col-span-12 lg:col-span-4 flex flex-col gap-4 h-full">
+          <RequestedPrCard requestedCount={requestedList?.count ?? 0} />
+          <GithubStatsCard stats={stats} />
+        </div>
+
+        <div className="col-span-12 lg:col-span-8 h-full">
+          <RepoReviewStatsCard repoStats={repoStats} />
+        </div>
+
+        {/* 중단 */}
+        <div className="col-span-12 lg:col-span-4 h-full">
+          <RepoEventsCard events={events} />
+        </div>
+
+        <div className="col-span-12 lg:col-span-4 h-full">
+          <ReviewCommentsCard comments={comments} />
+        </div>
+
+        <div className="col-span-12 lg:col-span-4 h-full">
+          <PrListCard prList={prList} />
+        </div>
+
+        {/* 하단 */}
+        <div className="col-span-12">
+          <OrgListSection orgs={orgs} />
+        </div>
       </div>
-      <OrgListSection orgs={orgs} />
     </div>
   );
 }
