@@ -20,7 +20,10 @@ export default function DashboardView({
       <div className="grid grid-cols-12 gap-4 items-stretch auto-rows-fr">
         {/* 상단 */}
         <div className="col-span-12 lg:col-span-4 flex flex-col gap-4 h-full">
-          <RequestedPrCard requestedCount={requestedList?.count ?? 0} />
+          <RequestedPrCard
+            requestedCount={requestedList?.count ?? 0}
+            items={requestedList?.items ?? []}
+          />
           <GithubStatsCard stats={stats} />
         </div>
 
