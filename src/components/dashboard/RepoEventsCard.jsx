@@ -18,11 +18,30 @@ export default function RepoEventsCard({ events = [] }) {
                 href={meta.url || "#"}
                 target="_blank"
                 rel="noreferrer"
-                className="border rounded-lg p-3 hover:bg-gray-50 hover:border-gray-300 transition"
+                className="border rounded-lg p-3 flex flex-col gap-1 hover:bg-gray-50 hover:border-gray-300 transition"
               >
-                <div className="text-sm">
-                  <span className="font-semibold">{meta.actor}</span>{" "}
-                  <span className="text-gray-500">{meta.actionText}</span>
+                <div className="text-sm flex justify-between">
+                  <div className="flex gap-2">
+                    <div className="flex items-center gap-2">
+                      <img
+                        src={meta.avatar}
+                        alt={meta.avatar}
+                        className="w-6 h-6 rounded-full"
+                        loading="lazy"
+                      />
+                    </div>
+                    <span className="font-semibold">{meta.actor}</span>{" "}
+                  </div>
+                  {/* <span className="text-gray-500">{meta.actionText}</span> */}
+                  <span
+                    className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                      meta.actionText === "opened"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-gray-200 text-gray-600"
+                    }`}
+                  >
+                    {meta.actionText === "opened" ? "OPEN" : "CLOSED"}
+                  </span>
                 </div>
 
                 <div className="text-sm font-semibold break-words">
