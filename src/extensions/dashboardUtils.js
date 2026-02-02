@@ -20,6 +20,11 @@ export function getEventMeta(e) {
   let title = "";
   let url = "";
 
+  // IssuesEvent ? opened : closed
+  // PullRequsetEvent ? opened : merged
+  // PullRequsetReviewEvent ? created
+  // PullRequsetReviewCommentEvent ? created
+
   if (e?.type === "IssuesEvent") {
     actionText = e?.payload?.action ?? "";
     title = e?.payload?.issue?.title ?? "(제목 없음)";
@@ -43,3 +48,17 @@ export const truncateTo1Decimal = (value = 0) => {
   if (Number.isNaN(num)) return 0;
   return Math.floor(num * 10) / 10;
 };
+
+export function getStateBadgeClass(state) {
+  if (state === "open") return "bg-emerald-100 text-emerald-700";
+  if (state === "closed") return "bg-slate-200 text-slate-700";
+  return "bg-yellow-100 text-yellow-700";
+}
+
+export function getPercentToColor(percent) {
+  if (percent >= 80) return "bg-emerald-500";
+  if (percent >= 60) return "bg-lime-500";
+  if (percent >= 40) return "bg-yellow-400";
+  if (percent >= 20) return "bg-orange-500";
+  return "bg-red-500";
+}
