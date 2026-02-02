@@ -14,6 +14,7 @@ export function getEventMeta(e) {
   const actor = e?.actor?.login ?? "unknown";
   const repo = e?.repo?.name ?? "";
   const createdAt = e?.created_at ?? "";
+  const avatar = e?.actor?.avatar_url ?? "";
 
   let actionText = "";
   let title = "";
@@ -34,7 +35,7 @@ export function getEventMeta(e) {
     title = e?.payload?.pull_request?.title ?? "(제목 없음)";
     url = e?.payload?.pull_request?.url ?? "";
   }
-  return { actor, repo, createdAt, actionText, title, url };
+  return { actor, repo, createdAt, actionText, title, url, avatar };
 }
 
 export const truncateTo1Decimal = (value = 0) => {
