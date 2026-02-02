@@ -1,4 +1,7 @@
-import { truncateTo1Decimal } from "extensions/dashboardUtils";
+import {
+  getPercentToColor,
+  truncateTo1Decimal,
+} from "extensions/dashboardUtils";
 
 export default function GithubStatsCard({ stats = [] }) {
   return (
@@ -8,21 +11,30 @@ export default function GithubStatsCard({ stats = [] }) {
       <div className="grid grid-cols-2 gap-3">
         {stats.map((item) => {
           const percent = truncateTo1Decimal(item.sharePercent);
+          const barColor = getPercentToColor(percent);
 
           return (
             <div
               key={item.label}
-              className="border rounded-lg p-3 min-h-[92px]"
+              className="border rounded-lg p-3 min-h-[92px] flex flex-col gap-1"
             >
-              <div className="font-semibold pb-1">{item.label}</div>
-              <div className="text-sm text-gray-600">
-                전체: {item.totalCount}
+              <div className="font-semibold">{item.label}</div>
+              <div className="text-[13px] text-gray-600">
+                Total Activity: {item.totalCount}
               </div>
-              <div className="text-sm text-gray-600">
-                내 활동: {item.myCount}
+              <div className="text-[13px] text-gray-600">
+                My Activity: {item.myCount}
               </div>
-              <div className="text-sm">
-                진행률: <span className="font-semibold">{percent}%</span>
+              <div className="flex flex-col gap-1">
+                <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full transition-all ${barColor}`}
+                    style={{ width: `${percent}%` }}
+                  />
+                </div>
+                <div className="text-[15px]">
+                  진행률: <span className="font-semibold">{percent}%</span>
+                </div>
               </div>
             </div>
           );
