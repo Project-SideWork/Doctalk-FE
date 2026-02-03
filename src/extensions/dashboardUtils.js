@@ -1,0 +1,64 @@
+export function formatKoreanDate(e) {
+  if (!e) return "";
+  const date = new Date(e);
+  return date.toLocaleString("ko-KR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+export function getEventMeta(e) {
+  const actor = e?.actor?.login ?? "unknown";
+  const repo = e?.repo?.name ?? "";
+  const createdAt = e?.created_at ?? "";
+  const avatar = e?.actor?.avatar_url ?? "";
+
+  let actionText = "";
+  let title = "";
+  let url = "";
+
+  // IssuesEvent ? opened : closed
+  // PullRequsetEvent ? opened : merged
+  // PullRequsetReviewEvent ? created
+  // PullRequsetReviewCommentEvent ? created
+
+  if (e?.type === "IssuesEvent") {
+    actionText = e?.payload?.action ?? "";
+    title = e?.payload?.issue?.title ?? "(제목 없음)";
+    url = e?.payload?.issue?.html_url ?? "";
+  } else if (e?.type === "PullRequestEvent") {
+    const merged = !!e?.payload?.pull_request?.merged;
+    actionText = merged ? "merged" : (e?.payload?.action ?? "");
+    title = e?.payload?.pull_request?.title ?? "(제목 없음)";
+    url = e?.payload?.pull_request?.url ?? "";
+  } else if (e?.type === "PullRequestReviewEvent") {
+    const state = e?.payload?.review?.state?.toLowerCase();
+    actionText = state ? `reviewed (${state})` : "reviewed";
+    title = e?.payload?.pull_request?.title ?? "(제목 없음)";
+    url = e?.payload?.pull_request?.url ?? "";
+  }
+  return { actor, repo, createdAt, actionText, title, url, avatar };
+}
+
+export const truncateTo1Decimal = (value = 0) => {
+  const num = Number(value);
+  if (Number.isNaN(num)) return 0;
+  return Math.floor(num * 10) / 10;
+};
+
+export function getStateBadgeClass(state) {
+  if (state === "open") return "bg-emerald-100 text-emerald-700";
+  if (state === "closed") return "bg-slate-200 text-slate-700";
+  return "bg-yellow-100 text-yellow-700";
+}
+
+export function getPercentToColor(percent) {
+  if (percent >= 80) return "bg-emerald-500";
+  if (percent >= 60) return "bg-lime-500";
+  if (percent >= 40) return "bg-yellow-400";
+  if (percent >= 20) return "bg-orange-500";
+  return "bg-red-500";
+}

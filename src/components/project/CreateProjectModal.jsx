@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CloseOn from "../../assets/icons/Close/CloseOn";
 import Input from "../common/Input";
 import Button from "../common/Button";
-import { axiosInstanceNoHeader } from "../../apis/axiosInstance";
+import { checkInviteEmail, registerProject } from "apis/projectApi";
 
 const CreateProjectModal = ({
   setNewProjectCreateModalOpen,
@@ -16,6 +16,10 @@ const CreateProjectModal = ({
   const [memberEmailList, setMemberEmailList] = useState([]);
   const [onSuccess, setOnSuccess] = useState(null);
   const [errMessage, setErrMessage] = useState("");
+  const [githubOrgName, setGithubOrgName] = useState("");
+  const [repoInput, setRepoInput] = useState("");
+  const [orgRepos, setOrgRepos] = useState([]);
+  const [repoErrMessage, setRepoErrMessage] = useState("");
 
   // 이메일 형식 검증
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -28,47 +32,59 @@ const CreateProjectModal = ({
       return;
     }
     try {
-      const res = await axiosInstanceNoHeader.get("/project/invite", {
-        params: { email },
-      });
+      await checkInviteEmail(email);
       setOnSuccess(true);
-      return res;
+      setErrMessage("");
     } catch (e) {
       setOnSuccess(false);
       setErrMessage(e.response?.data?.message || "이메일 확인 실패");
-      return e;
-    }
-  };
-
-  // 프로젝트 생성 API
-  const createProjectapi = async (projectName, description) => {
-    const invitedEmails = memberEmailList.length > 0 ? memberEmailList : [];
-    try {
-      const res = await axiosInstanceNoHeader.post("/project/register", {
-        projectName,
-        description,
-        invitedEmails,
-      });
-      alert("프로젝트가 생성되었습니다.");
-      setNewProjectCreateModalOpen(false);
-      setSidebarOpen(false);
-
-      if (onProjectCreated) onProjectCreated(); // 리스트 최신화
-
-      return res;
-    } catch (error) {
-      console.log("프로젝트 생성 실패:", error);
-      return error;
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createProjectapi(projectName, description);
+
+    // 요청바디
+    const payload = {
+      projectName,
+      description,
+      invitedEmails: memberEmailList,
+      githubInfos:
+        githubOrgName.trim() && orgRepos.length > 0
+          ? [{ githubOrgName: githubOrgName.trim(), orgRepos }]
+          : [],
+    };
+
+    try {
+      await registerProject(payload);
+      alert("프로젝트가 생성되었습니다.");
+
+      setNewProjectCreateModalOpen(false);
+      setSidebarOpen(false);
+      onProjectCreated?.();
+    } catch (error) {
+      console.log("프로젝트 생성 실패:", error);
+      alert("프로젝트 생성에 실패했습니다.");
+    }
+  };
+
+  // 레포지토리 추가 핸들러
+  const handleAddRepo = () => {
+    const trimmed = repoInput.trim();
+    if (!trimmed) return;
+
+    if (orgRepos.includes(trimmed)) {
+      setRepoErrMessage("이미 추가된 레포입니다.");
+      return;
+    }
+
+    setRepoErrMessage("");
+    setOrgRepos([...orgRepos, trimmed]);
+    setRepoInput("");
   };
 
   return (
-    <div className="w-[550px] h-[550px] flex flex-col justify-center items-center relative bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 overflow-hidden">
+    <div className="w-[550px] overflow-auto h-[620px] flex flex-col py-14 items-center relative bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200">
       {/* 닫기 버튼 */}
       <div
         className="w-8 h-8 absolute right-[20px] top-[20px] cursor-pointer"
@@ -98,6 +114,54 @@ const CreateProjectModal = ({
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
+          {/* 깃허브 조직명 */}
+          <Input
+            type="text"
+            title="GitHub 조직명"
+            placeholder="예: DoctalkOrg"
+            value={githubOrgName}
+            onChange={(e) => setGithubOrgName(e.target.value)}
+            required={false}
+          />
+          <Input
+            type="text"
+            title="레포 추가"
+            placeholder="예: frontend"
+            value={repoInput}
+            onChange={(e) => setRepoInput(e.target.value)}
+            required={false}
+            useButton={true}
+            onClick={handleAddRepo}
+            onSuccess={repoErrMessage ? false : null}
+            errmsg={repoErrMessage}
+          />
+
+          {orgRepos.length > 0 && (
+            <div className="w-full flex flex-col justify-start items-start gap-2 font-[Palanquin]">
+              <div className="text-gray-800 text-base font-semibold">
+                연동할 레포 목록
+              </div>
+              <ul className="w-full max-h-24 list-disc pl-1 overflow-y-auto">
+                {orgRepos.map((repo) => (
+                  <li
+                    key={repo}
+                    className="text-gray-700 w-full h-6 flex justify-between"
+                  >
+                    {repo}
+                    <span
+                      className="cursor-pointer"
+                      onClick={() =>
+                        setOrgRepos(orgRepos.filter((r) => r !== repo))
+                      }
+                    >
+                      <CloseOn />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {/* 멤버 이메일 */}
           <Input
             type="text"

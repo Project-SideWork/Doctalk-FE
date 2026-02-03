@@ -20,6 +20,10 @@ const ProjectTabs = () => {
       label: "설정",
       icon: <SettingsIcon />,
     },
+    {
+      to: `/project/dashboard/${projectId}`,
+      label: "대시보드",
+    },
   ];
 
   return (

@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React from "react";
 import CircleOkOn from "../../assets/icons/CircleOk/CircleOkOn";
 import CancelOn from "../../assets/icons/Cancel/CancelOn";
 import Button from "./Button";
@@ -32,8 +32,8 @@ const Input = ({
             placeholder={placeholder}
             required={required}
           />
-          {onSuccess == true && <CircleOkOn color={"blue"} />}
-          {onSuccess == false && <CancelOn color={"red"} />}
+          {onSuccess === true && <CircleOkOn color={"blue"} />}
+          {onSuccess === false && <CancelOn color={"red"} />}
         </div>
         {useButton && (
           <Button
