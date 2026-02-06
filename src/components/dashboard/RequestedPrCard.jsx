@@ -1,7 +1,4 @@
-import {
-  formatKoreanDate,
-  getStateBadgeClass,
-} from "extensions/dashboardUtils";
+import { formatKoreanDate, getBadgeClass } from "extensions/dashboardUtils";
 
 export default function RequestedPrCard({ requestedCount = 0, items = [] }) {
   return (
@@ -33,7 +30,7 @@ export default function RequestedPrCard({ requestedCount = 0, items = [] }) {
                   {pr.title}
                 </div>
                 <span
-                  className={`shrink-0 text-xs px-2 py-1 rounded-full ${getStateBadgeClass(
+                  className={`shrink-0 text-xs px-2 py-1 rounded-full ${getBadgeClass(
                     pr.state,
                   )}`}
                 >
