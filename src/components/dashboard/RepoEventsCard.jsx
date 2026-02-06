@@ -1,4 +1,9 @@
-import { formatKoreanDate, getEventMeta } from "extensions/dashboardUtils";
+import {
+  formatKoreanDate,
+  getEventMeta,
+  getBadgeClass,
+  getKindClass,
+} from "extensions/dashboardUtils";
 
 export default function RepoEventsCard({ events = [] }) {
   return (
@@ -18,42 +23,76 @@ export default function RepoEventsCard({ events = [] }) {
                 href={meta.url || "#"}
                 target="_blank"
                 rel="noreferrer"
-                className="border rounded-lg p-3 flex flex-col gap-1 hover:bg-gray-50 hover:border-gray-300 transition"
+                className="group border rounded-lg p-3 flex gap-3 hover:bg-gray-50 hover:border-gray-300 transition"
               >
-                <div className="text-sm flex justify-between">
-                  <div className="flex gap-2">
-                    <div className="flex items-center gap-2">
-                      <img
-                        src={meta.avatar}
-                        alt={meta.avatar}
-                        className="w-6 h-6 rounded-full"
-                        loading="lazy"
-                      />
+                {/* 왼쪽 타입 구분 바 */}
+                <div
+                  className={`w-1 rounded-full ${getKindClass(meta.kind)}`}
+                />
+
+                <div className="flex-1 min-w-0 flex flex-col gap-1">
+                  {/* 상단 라인: 이벤트 타입 + 타입 뱃지 + 시간 */}
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="text-xs font-semibold text-gray-600">
+                        {meta.kind}
+                      </span>
+                      <span
+                        className={`text-[11px] px-2 py-0.5 rounded-full font-medium ${getBadgeClass(
+                          meta.badgeVariant,
+                        )}`}
+                      >
+                        {meta.actionLabel}
+                      </span>
                     </div>
-                    <span className="font-semibold">{meta.actor}</span>{" "}
+                    <span className="text-xs text-gray-400 shrink-0">
+                      {formatKoreanDate(meta.createdAt)}
+                    </span>
                   </div>
-                  {/* <span className="text-gray-500">{meta.actionText}</span> */}
-                  <span
-                    className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                      meta.actionText === "opened"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-gray-200 text-gray-600"
-                    }`}
-                  >
-                    {meta.actionText === "opened" ? "OPEN" : "CLOSED"}
-                  </span>
-                </div>
 
-                <div className="text-sm font-semibold break-words">
-                  {meta.title}
-                </div>
+                  {/* 메인 라인: actor + #번호 */}
+                  <div className="flex items-center gap-2 min-w-0">
+                    <img
+                      src={meta.avatar}
+                      alt={meta.actor}
+                      className="w-6 h-6 rounded-full shrink-0"
+                      loading="lazy"
+                    />
+                    <span
+                      title={meta.actor}
+                      className="text-sm font-semibold text-gray-900 shrink-0"
+                    >
+                      {meta.actor}
+                    </span>
 
-                <div className="text-xs text-gray-400">
-                  in <span className="font-semibold">{meta.repo}</span>
-                </div>
+                    <span className="text-sm text-gray-400">·</span>
 
-                <div className="text-xs text-gray-400">
-                  {formatKoreanDate(meta.createdAt)}
+                    <span
+                      title={meta.number}
+                      className="text-sm font-medium text-gray-900"
+                    >
+                      #{meta.number}
+                    </span>
+                  </div>
+
+                  <div className="text-xs font-[400] text-gray-600 truncate">
+                    in{" "}
+                    <span
+                      title={meta.repo}
+                      className="font-[400] py-[2px] px-[6px] text-xs rounded-[12px] text-[#0969da] bg-[#ddf4ff]"
+                    >
+                      {meta.repo}
+                    </span>
+                  </div>
+
+                  {meta.title && meta.title !== "(제목 없음)" && (
+                    <div
+                      title={meta.title}
+                      className="text-sm text-gray-700 truncate font-medium"
+                    >
+                      {meta.title}
+                    </div>
+                  )}
                 </div>
               </a>
             );
