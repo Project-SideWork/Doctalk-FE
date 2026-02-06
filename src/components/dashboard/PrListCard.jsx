@@ -41,10 +41,10 @@ export default function PrListCard({ prList = [] }) {
                   className={`text-xs px-2 py-0.5 rounded-full font-medium ${
                     pr.state === "open"
                       ? "bg-green-100 text-green-700"
-                      : "bg-gray-200 text-gray-600"
+                      : "bg-violet-100 text-violet-700"
                   }`}
                 >
-                  {pr.state === "open" ? "OPEN" : "CLOSED"}
+                  {pr.state === "open" ? "OPEN" : "MERGED"}
                 </span>
               </div>
 
