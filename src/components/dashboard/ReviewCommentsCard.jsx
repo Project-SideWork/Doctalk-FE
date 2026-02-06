@@ -34,7 +34,10 @@ export default function ReviewCommentsCard({ comments = [] }) {
                 {c.filePath || "(파일 정보 없음)"}
               </div>
 
-              <p className="mt-2 text-sm line-clamp-3 whitespace-pre-wrap">
+              <p
+                className="mt-2 text-sm line-clamp-3 whitespace-pre-wrap"
+                title={c.body}
+              >
                 {c.body}
               </p>
 
@@ -42,7 +45,7 @@ export default function ReviewCommentsCard({ comments = [] }) {
                 href={c.commentUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-2 inline-block text-xs text-blue-600 hover:underline"
+                className="mt-2 inline-block text-xs font-medium text-blue-600 hover:underline"
               >
                 GitHub에서 보기 →
               </a>
