@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import ScheduleListPreview from "../../components/calender/schedule/ScheduleListPreview";
 import ProjectListPreview from "../../components/home/ProjectListPreview";
 import Layout from "../../components/home/Layout";
 import { axiosInstanceNoHeader } from "../../apis/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import ScheduleListPreview from "components/Calender/schedule/ScheduleListPreview";
 
 const DoctalkMain = () => {
   const [selectedProjectId, setSelectedProjectId] = useState("");
