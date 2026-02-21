@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import TaskCard from "../TaskCard";
 import PlusOn from "../../../assets/icons/Plus/PlusOn";
 import PlusHover from "../../../assets/icons/Plus/PlusHover";
