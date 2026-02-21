@@ -34,11 +34,6 @@ const TodoColumn = ({
   const [isDeleting, setIsDeleting] = useState(false); // 삭제 여부
   const [isHovered, setIsHovered] = useState(false); // 아이콘 hover
 
-  useEffect(() => {
-    if (!newTask.taskId) return;
-    autoSaveTask(newTask);
-  }, [newTask.coworkers]);
-
   // 기존 작업 리스트에서 "PENDING" 상태만 가져옴
   const filteredTasks = useMemo(() => {
     return taskList.filter((task) => task.status === "PENDING");
@@ -79,9 +74,7 @@ const TodoColumn = ({
       original.status !== current.status ||
       original.content !== current.content ||
       original.deadline !== current.deadline ||
-      (original.coworkers || []).join() !== (current.coworkers || []).join() || // ✅ 담당자 비교 추가
-      JSON.stringify(original.attachmentList) !==
-        JSON.stringify(current.attachmentList)
+      (original.coworkers || []).join() !== (current.coworkers || []).join()
     );
   };
 
