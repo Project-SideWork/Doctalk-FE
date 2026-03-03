@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import PlusOff from "../../assets/icons/Plus/PlusOff";
-import ArrowRightOff from "../../assets/icons/ArrowRight/ArrowRightOff";
 import { axiosInstanceNoHeader } from "../../apis/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
@@ -65,7 +64,7 @@ const Sidebar = ({
         ))}
       </div>
 
-      <div className="flex p-3 flex-col items-start gap-y-1 rounded-lg bg-gray-100">
+      {/* <div className="flex flex-col items-start p-3 bg-gray-100 rounded-lg gap-y-1">
         <div className="flex w-[176px] items-center gap-x-[2px]">
           <p className="text-gray-400 font-['Palanquin'] text-[10px] font-bold leading-[1.4]">
             요금제 정보
@@ -75,7 +74,7 @@ const Sidebar = ({
         <div className="self-stretch text-[#1f2937] font-['Palanquin'] text-xs font-bold leading-[1.4]">
           스탠다드 구독 중
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

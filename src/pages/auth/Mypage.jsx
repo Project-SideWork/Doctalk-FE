@@ -1,7 +1,7 @@
 import React from "react";
 import UserIdCard from "../../components/home/UserIdCard";
-import Calender from "../../components/calender/Calender";
 import Layout from "../../components/home/Layout";
+import Calender from "components/Calender/Calender";
 
 const Mypage = () => {
   return (

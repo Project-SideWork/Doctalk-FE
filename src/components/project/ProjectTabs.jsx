@@ -1,8 +1,13 @@
 import { NavLink, useParams } from "react-router-dom";
-import { DocumentIcon, SettingsIcon, WorkBoardIcon } from "../../assets/icons";
+import {
+  DocumentIcon,
+  SettingsIcon,
+  WorkBoardIcon,
+  DashboardIcon,
+} from "assets/icons";
 
 const ProjectTabs = () => {
-  const { projectId } = useParams(); // ⬅️ URL에서 projectId 동적 추출
+  const { projectId } = useParams();
 
   const tabList = [
     {
@@ -23,6 +28,7 @@ const ProjectTabs = () => {
     {
       to: `/project/dashboard/${projectId}`,
       label: "대시보드",
+      icon: <DashboardIcon />,
     },
   ];
 
