@@ -16,8 +16,8 @@ const Skeleton = () => (
 const splitToSections = (text) => {
   const normalized = (text || "").replace(/\r/g, "");
   const parts = normalized
-    .split(/\n(?=\s*(\d+[\.\)]|[①-⑳]|•|-)\s*)/g)
-    .map((s) => s.replace(/^\s*(\d+[\.\)]|[①-⑳]|•|-)\s*/, "").trim())
+    .split(/\n(?=\s*(\d+[.)]|[①-⑳]|•|-)\s*)/g)
+    .map((s) => s.replace(/^\s*(\d+[.)]|[①-⑳]|•|-)\s*/, "").trim())
     .filter(Boolean);
   return parts.length ? parts : [normalized];
 };
