@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import TaskCard from "../TaskCard";
 import PlusOn from "../../../assets/icons/Plus/PlusOn";
 import PlusHover from "../../../assets/icons/Plus/PlusHover";
@@ -32,12 +32,6 @@ const CompletedColumn = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-
-  // 담당자 변경 시 자동 저장
-  useEffect(() => {
-    if (!newTask.taskId) return;
-    autoSaveTask(newTask);
-  }, [newTask.coworkers]);
 
   // 완료된 작업만 필터링
   const filteredTasks = useMemo(() => {
@@ -81,9 +75,7 @@ const CompletedColumn = ({
       original.status !== current.status ||
       original.content !== current.content ||
       original.deadline !== current.deadline ||
-      (original.coworkers || []).join() !== (current.coworkers || []).join() ||
-      JSON.stringify(original.attachmentList) !==
-        JSON.stringify(current.attachmentList)
+      (original.coworkers || []).join() !== (current.coworkers || []).join()
     );
   };
 
