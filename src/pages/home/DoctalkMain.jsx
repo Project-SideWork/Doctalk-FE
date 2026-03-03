@@ -15,7 +15,7 @@ const DoctalkMain = () => {
     try {
       const res = await axiosInstanceNoHeader.get("/mypage/user", {
         params: {
-          Authorization: localStorage.getItem("accesToken"),
+          Authorization: localStorage.getItem("accessToken"),
         },
       });
       localStorage.setItem("userName", res.data.result?.name);
