@@ -7,7 +7,6 @@ import ScheduleListPreview from "components/Calender/schedule/ScheduleListPrevie
 
 const DoctalkMain = () => {
   const [selectedProjectId, setSelectedProjectId] = useState("");
-  const [userInfo, setUserInfo] = useState("");
   const [projects, setProjects] = useState([]);
   const navigate = useNavigate();
 
@@ -19,7 +18,6 @@ const DoctalkMain = () => {
           Authorization: localStorage.getItem("accesToken"),
         },
       });
-      setUserInfo(res.data.result);
       localStorage.setItem("userName", res.data.result?.name);
       localStorage.setItem("email", res.data.result?.email);
     } catch (error) {
