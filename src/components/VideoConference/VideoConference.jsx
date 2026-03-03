@@ -1,15 +1,13 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ProfileBlue from "../../assets/icons/Profile/ProfileBlue";
 import ProfileYellow from "../../assets/icons/Profile/ProfileYellow";
 import {
-  Phone,
   PhoneOff,
   Mic,
   MicOff,
   Video,
   VideoOff,
   MessageCircle,
-  Share,
   Users,
   X,
   Send,
@@ -79,7 +77,7 @@ const VideoConference = () => {
   useEffect(() => {
     const name = prompt(
       "이름을 입력해주세요",
-      `User_${Math.floor(Math.random() * 1000)}`
+      `User_${Math.floor(Math.random() * 1000)}`,
     );
     setUserName(name || `User_${Math.floor(Math.random() * 1000)}`);
   }, []);
@@ -202,6 +200,10 @@ const VideoConference = () => {
             console.error("❌ Server error:", data.message);
             alert(`서버 오류: ${data.message}`);
             break;
+
+          default:
+            console.warn("식별되지 않은 에러:", data.type);
+            break;
         }
       };
 
@@ -209,7 +211,7 @@ const VideoConference = () => {
         console.log(
           "🔌 Disconnected from signaling server",
           event.code,
-          event.reason
+          event.reason,
         );
         setConnectionStatus("disconnected");
       };
@@ -217,7 +219,7 @@ const VideoConference = () => {
       wsRef.current.onerror = (error) => {
         console.error("❌ WebSocket connection error:", error);
         console.log(
-          "시그널링 서버에 연결할 수 없습니다. 로컬에서 서버를 실행하거나 AWS에 배포해주세요."
+          "시그널링 서버에 연결할 수 없습니다. 로컬에서 서버를 실행하거나 AWS에 배포해주세요.",
         );
         setConnectionStatus("disconnected");
       };
@@ -312,7 +314,7 @@ const VideoConference = () => {
               0,
               0,
               canvas.width,
-              canvas.height
+              canvas.height,
             );
             gradient.addColorStop(0, `hsl(${hue}, 50%, 20%)`);
             gradient.addColorStop(1, `hsl(${(hue + 60) % 360}, 50%, 30%)`);
@@ -326,7 +328,7 @@ const VideoConference = () => {
               canvas.height / 2 - 20,
               50,
               0,
-              2 * Math.PI
+              2 * Math.PI,
             );
             ctx.fill();
 
@@ -338,7 +340,7 @@ const VideoConference = () => {
             ctx.fillText(
               "카메라 없음",
               canvas.width / 2,
-              canvas.height / 2 + 75
+              canvas.height / 2 + 75,
             );
 
             requestAnimationFrame(animate);
@@ -392,7 +394,7 @@ const VideoConference = () => {
               0,
               0,
               canvas.width,
-              canvas.height
+              canvas.height,
             );
             gradient.addColorStop(0, `hsl(${hue}, 50%, 20%)`);
             gradient.addColorStop(1, `hsl(${(hue + 60) % 360}, 50%, 30%)`);
@@ -406,7 +408,7 @@ const VideoConference = () => {
               canvas.height / 2 - 20,
               50,
               0,
-              2 * Math.PI
+              2 * Math.PI,
             );
             ctx.fill();
 
@@ -418,7 +420,7 @@ const VideoConference = () => {
               canvas.height / 2 - 30,
               5,
               0,
-              2 * Math.PI
+              2 * Math.PI,
             );
             ctx.stroke();
             ctx.beginPath();
@@ -427,7 +429,7 @@ const VideoConference = () => {
               canvas.height / 2 - 30,
               5,
               0,
-              2 * Math.PI
+              2 * Math.PI,
             );
             ctx.stroke();
             ctx.beginPath();
@@ -442,7 +444,7 @@ const VideoConference = () => {
             ctx.fillText(
               "카메라 없음",
               canvas.width / 2,
-              canvas.height / 2 + 75
+              canvas.height / 2 + 75,
             );
 
             requestAnimationFrame(animate);
@@ -493,7 +495,7 @@ const VideoConference = () => {
     console.log(
       "RemoteStreams updated:",
       Object.keys(remoteStreams).length,
-      Object.keys(remoteStreams)
+      Object.keys(remoteStreams),
     );
   }, [remoteStreams]);
 
@@ -501,7 +503,7 @@ const VideoConference = () => {
   useEffect(() => {
     console.log(
       "Screen sharing users changed:",
-      Array.from(screenSharingUsers)
+      Array.from(screenSharingUsers),
     );
   }, [screenSharingUsers]);
 
@@ -567,7 +569,7 @@ const VideoConference = () => {
             to: peerId,
             candidate: event.candidate,
             roomId, // 방 ID 추가
-          })
+          }),
         );
       }
     };
@@ -644,7 +646,7 @@ const VideoConference = () => {
       if (pc.connectionState === "failed") {
         // 연결 실패 시 재시도
         console.log(
-          `Connection failed with ${peerId}, attempting to restart ICE`
+          `Connection failed with ${peerId}, attempting to restart ICE`,
         );
         pc.restartIce();
       }
@@ -652,7 +654,7 @@ const VideoConference = () => {
 
     pc.oniceconnectionstatechange = () => {
       console.log(
-        `ICE connection state with ${peerId}: ${pc.iceConnectionState}`
+        `ICE connection state with ${peerId}: ${pc.iceConnectionState}`,
       );
     };
 
@@ -665,7 +667,7 @@ const VideoConference = () => {
         }
         console.log(
           `Adding ${track.kind} track to peer ${peerId}:`,
-          track.enabled
+          track.enabled,
         );
       });
     } else if (originalStreamRef.current) {
@@ -676,7 +678,7 @@ const VideoConference = () => {
         }
         console.log(
           `Adding original ${track.kind} track to peer ${peerId}:`,
-          track.enabled
+          track.enabled,
         );
       });
     }
@@ -699,13 +701,13 @@ const VideoConference = () => {
   // 새 사용자 참가 처리
   const handleUserJoined = async (data) => {
     console.log(
-      `User ${data.userName} joined room ${data.roomId || "unknown"}, creating peer connection`
+      `User ${data.userName} joined room ${data.roomId || "unknown"}, creating peer connection`,
     );
 
     // 방 ID가 다르면 무시
     if (data.roomId && data.roomId !== roomId) {
       console.log(
-        `Ignoring user from different room: ${data.roomId} vs ${roomId}`
+        `Ignoring user from different room: ${data.roomId} vs ${roomId}`,
       );
       return;
     }
@@ -735,7 +737,7 @@ const VideoConference = () => {
           to: data.userId,
           offer,
           roomId, // 방 ID 추가
-        })
+        }),
       );
 
       console.log(`Sent offer to ${data.userId} in room ${roomId}`);
@@ -747,13 +749,13 @@ const VideoConference = () => {
   // Offer 처리
   const handleOffer = async (data) => {
     console.log(
-      `Received offer from ${data.from} in room ${data.roomId || "unknown"}`
+      `Received offer from ${data.from} in room ${data.roomId || "unknown"}`,
     );
 
     // 방 ID가 다르면 무시
     if (data.roomId && data.roomId !== roomId) {
       console.log(
-        `Ignoring offer from different room: ${data.roomId} vs ${roomId}`
+        `Ignoring offer from different room: ${data.roomId} vs ${roomId}`,
       );
       return;
     }
@@ -781,7 +783,7 @@ const VideoConference = () => {
       // 버퍼링된 ICE candidates 처리
       if (pc.pendingCandidates && pc.pendingCandidates.length > 0) {
         console.log(
-          `Processing ${pc.pendingCandidates.length} buffered ICE candidates for ${data.from}`
+          `Processing ${pc.pendingCandidates.length} buffered ICE candidates for ${data.from}`,
         );
         for (const candidate of pc.pendingCandidates) {
           await pc.addIceCandidate(candidate);
@@ -795,7 +797,7 @@ const VideoConference = () => {
           to: data.from,
           answer,
           roomId, // 방 ID 추가
-        })
+        }),
       );
 
       console.log(`Sent answer to ${data.from} in room ${roomId}`);
@@ -807,13 +809,13 @@ const VideoConference = () => {
   // Answer 처리
   const handleAnswer = async (data) => {
     console.log(
-      `Received answer from ${data.from} in room ${data.roomId || "unknown"}`
+      `Received answer from ${data.from} in room ${data.roomId || "unknown"}`,
     );
 
     // 방 ID가 다르면 무시
     if (data.roomId && data.roomId !== roomId) {
       console.log(
-        `Ignoring answer from different room: ${data.roomId} vs ${roomId}`
+        `Ignoring answer from different room: ${data.roomId} vs ${roomId}`,
       );
       return;
     }
@@ -842,13 +844,13 @@ const VideoConference = () => {
   // ICE Candidate 처리
   const handleIceCandidate = async (data) => {
     console.log(
-      `Received ICE candidate from ${data.from} in room ${data.roomId || "unknown"}`
+      `Received ICE candidate from ${data.from} in room ${data.roomId || "unknown"}`,
     );
 
     // 방 ID가 다르면 무시
     if (data.roomId && data.roomId !== roomId) {
       console.log(
-        `Ignoring ICE candidate from different room: ${data.roomId} vs ${roomId}`
+        `Ignoring ICE candidate from different room: ${data.roomId} vs ${roomId}`,
       );
       return;
     }
@@ -883,7 +885,7 @@ const VideoConference = () => {
     // 방 ID가 다르면 무시
     if (data.roomId && data.roomId !== roomId) {
       console.log(
-        `Ignoring user leave from different room: ${data.roomId} vs ${roomId}`
+        `Ignoring user leave from different room: ${data.roomId} vs ${roomId}`,
       );
       return;
     }
@@ -922,7 +924,7 @@ const VideoConference = () => {
     // 방 ID가 다르면 무시
     if (data.roomId && data.roomId !== roomId) {
       console.log(
-        `Ignoring chat message from different room: ${data.roomId} vs ${roomId}`
+        `Ignoring chat message from different room: ${data.roomId} vs ${roomId}`,
       );
       return;
     }
@@ -951,7 +953,7 @@ const VideoConference = () => {
     // 방 ID가 다르면 무시
     if (data.roomId && data.roomId !== roomId) {
       console.log(
-        `Ignoring screen share status from different room: ${data.roomId} vs ${roomId}`
+        `Ignoring screen share status from different room: ${data.roomId} vs ${roomId}`,
       );
       return;
     }
@@ -971,13 +973,13 @@ const VideoConference = () => {
   // Renegotiation 처리 (화면공유용)
   const handleRenegotiate = async (data) => {
     console.log(
-      `Received renegotiation offer from ${data.from} in room ${data.roomId || "unknown"}`
+      `Received renegotiation offer from ${data.from} in room ${data.roomId || "unknown"}`,
     );
 
     // 방 ID가 다르면 무시
     if (data.roomId && data.roomId !== roomId) {
       console.log(
-        `Ignoring renegotiation from different room: ${data.roomId} vs ${roomId}`
+        `Ignoring renegotiation from different room: ${data.roomId} vs ${roomId}`,
       );
       return;
     }
@@ -996,7 +998,7 @@ const VideoConference = () => {
             to: data.from,
             answer,
             roomId, // 방 ID 추가
-          })
+          }),
         );
 
         if (data.isScreenShare) {
@@ -1024,13 +1026,13 @@ const VideoConference = () => {
   // Renegotiation answer 처리
   const handleRenegotiateAnswer = async (data) => {
     console.log(
-      `Received renegotiation answer from ${data.from} in room ${data.roomId || "unknown"}`
+      `Received renegotiation answer from ${data.from} in room ${data.roomId || "unknown"}`,
     );
 
     // 방 ID가 다르면 무시
     if (data.roomId && data.roomId !== roomId) {
       console.log(
-        `Ignoring renegotiation answer from different room: ${data.roomId} vs ${roomId}`
+        `Ignoring renegotiation answer from different room: ${data.roomId} vs ${roomId}`,
       );
       return;
     }
@@ -1044,7 +1046,7 @@ const VideoConference = () => {
       } catch (error) {
         console.error(
           `Error handling renegotiation answer from ${data.from}:`,
-          error
+          error,
         );
       }
     }
@@ -1106,13 +1108,13 @@ const VideoConference = () => {
             try {
               sender.replaceTrack(screenVideoTrack);
               console.log(
-                `Replaced video track with screen track for ${peerId}`
+                `Replaced video track with screen track for ${peerId}`,
               );
             } catch (e) {
               // 브라우저 호환성 등으로 실패하면 fallback: addTrack 하고 sender 저장
               console.warn(
                 `replaceTrack failed for ${peerId}, fallback to addTrack`,
-                e
+                e,
               );
               const newSender = pc.addTrack(screenVideoTrack, screenStream);
               videoSendersRef.current[peerId] = newSender;
@@ -1141,7 +1143,7 @@ const VideoConference = () => {
               isSharing: true,
               userId,
               roomId,
-            })
+            }),
           );
         }
 
@@ -1155,7 +1157,7 @@ const VideoConference = () => {
             });
             pc.dataChannel.send(message);
             console.log(
-              `Sent screen share status to ${peerId} via data channel`
+              `Sent screen share status to ${peerId} via data channel`,
             );
           }
         });
@@ -1218,14 +1220,14 @@ const VideoConference = () => {
           isSharing: false,
           userId,
           roomId,
-        })
+        }),
       );
     }
 
     Object.entries(peersRef.current).forEach(([peerId, pc]) => {
       if (pc.dataChannel && pc.dataChannel.readyState === "open") {
         pc.dataChannel.send(
-          JSON.stringify({ type: "screen-share-status", isSharing: false })
+          JSON.stringify({ type: "screen-share-status", isSharing: false }),
         );
       }
     });
@@ -1245,7 +1247,7 @@ const VideoConference = () => {
           message: newMessage,
           userName,
           roomId, // 방 ID 추가
-        })
+        }),
       );
 
       setMessages((prev) => [
@@ -1277,7 +1279,7 @@ const VideoConference = () => {
           type: "leave",
           roomId,
           userId,
-        })
+        }),
       );
       wsRef.current.close();
     }
@@ -1400,7 +1402,7 @@ const VideoConference = () => {
                       className="relative bg-gray-800 rounded-lg overflow-hidden"
                       onClick={() =>
                         setFocusedStream(
-                          focusedStream === peerId ? null : peerId
+                          focusedStream === peerId ? null : peerId,
                         )
                       }
                     >
@@ -1412,7 +1414,7 @@ const VideoConference = () => {
                               if (stream && el.srcObject !== stream) {
                                 el.srcObject = stream;
                                 console.log(
-                                  `Video element connected for ${peerId}`
+                                  `Video element connected for ${peerId}`,
                                 );
                               }
                             }
@@ -1692,7 +1694,7 @@ const VideoConference = () => {
           console.log("Data Channels:");
           Object.entries(peersRef.current).forEach(([peerId, pc]) => {
             console.log(
-              `  ${peerId}: ${pc.dataChannel?.readyState || "no channel"}`
+              `  ${peerId}: ${pc.dataChannel?.readyState || "no channel"}`,
             );
           });
           console.log("Video Elements:");
