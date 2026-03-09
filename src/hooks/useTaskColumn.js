@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   createTask,
   createVersion,
@@ -8,16 +8,17 @@ import {
   fetchVersionList,
   changeTaskStatus,
   uploadFile,
-} from "../api/taskApi";
+} from "apis/taskApi";
 
 const useTaskColumn = (projectId) => {
   const [todoList, setTodoList] = useState([]);
   const [inProgressList, setInProgressList] = useState([]);
   const [completedList, setCompletedList] = useState([]);
   const [error, setError] = useState(null);
-  const [isSaving, setIsSaving] = useState(false); // 중복 저장 방지
   const token = localStorage.getItem("accessToken");
   const userEmail = localStorage.getItem("email");
+  const savingRef = useRef(false);
+  const recentFileSaveRef = useRef(false);
 
   useEffect(() => {
     if (!projectId) return;
@@ -31,7 +32,7 @@ const useTaskColumn = (projectId) => {
 
       // 중복 제거 + coworkers를 editors로 보정
       const uniqueTasks = Array.from(
-        new Map(result.map((t) => [t.taskId || t.id, t])).values()
+        new Map(result.map((t) => [t.taskId || t.id, t])).values(),
       ).map((task) => ({
         ...task,
         taskId: task.id || task.taskId,
@@ -54,19 +55,19 @@ const useTaskColumn = (projectId) => {
           } catch (err) {
             console.error(
               `버전 목록 불러오기 실패 (taskId: ${task.taskId})`,
-              err
+              err,
             );
             return { ...task, attachmentList: [] };
           }
-        })
+        }),
       );
 
       setTodoList(tasksWithAttachments.filter((t) => t.status === "PENDING"));
       setInProgressList(
-        tasksWithAttachments.filter((t) => t.status === "PROGRESS")
+        tasksWithAttachments.filter((t) => t.status === "PROGRESS"),
       );
       setCompletedList(
-        tasksWithAttachments.filter((t) => t.status === "COMPLETED")
+        tasksWithAttachments.filter((t) => t.status === "COMPLETED"),
       );
 
       return tasksWithAttachments;
@@ -138,8 +139,8 @@ const useTaskColumn = (projectId) => {
 
   // ✅ 공통 버전 저장 함수 (변경사항 없으면 스킵)
   const saveTask = async (data, options = {}) => {
-    if (isSaving) return;
-    setIsSaving(true);
+    if (savingRef.current) return;
+    savingRef.current = true;
 
     const { file, deleteFileId } = options;
     try {
@@ -161,12 +162,10 @@ const useTaskColumn = (projectId) => {
         latest.deadline !== data.deadline ||
         JSON.stringify(latest.editors || []) !==
           JSON.stringify(data.editors || []) ||
-        file ||
-        deleteFileId; // 파일 변경이 있으면 무조건 저장
+        !!file ||
+        !!deleteFileId;
 
-      if (!hasChanges) {
-        return;
-      }
+      if (!hasChanges) return;
 
       const nextVersion = getNextVersion(history);
 
@@ -202,12 +201,13 @@ const useTaskColumn = (projectId) => {
     } catch (err) {
       console.error("❌ saveTask 실패:", err);
     } finally {
-      setIsSaving(false);
+      savingRef.current = false;
     }
   };
 
   // ✅ 자동 저장
   const autoSaveTask = async (data) => {
+    if (recentFileSaveRef.current) return;
     if (!data.title || !data.content || !data.deadline) return;
     if (!data.taskId) {
       await createNewTask(data);
@@ -332,6 +332,7 @@ const useTaskColumn = (projectId) => {
     loadTaskList,
     saveTaskWithFile,
     saveTaskAfterFileDelete,
+    recentFileSaveRef,
   };
 };
 
