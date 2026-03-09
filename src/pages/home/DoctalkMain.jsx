@@ -7,7 +7,6 @@ import ScheduleListPreview from "components/Calender/schedule/ScheduleListPrevie
 
 const DoctalkMain = () => {
   const [selectedProjectId, setSelectedProjectId] = useState("");
-  const [userInfo, setUserInfo] = useState("");
   const [projects, setProjects] = useState([]);
   const navigate = useNavigate();
 
@@ -16,10 +15,9 @@ const DoctalkMain = () => {
     try {
       const res = await axiosInstanceNoHeader.get("/mypage/user", {
         params: {
-          Authorization: localStorage.getItem("accesToken"),
+          Authorization: localStorage.getItem("accessToken"),
         },
       });
-      setUserInfo(res.data.result);
       localStorage.setItem("userName", res.data.result?.name);
       localStorage.setItem("email", res.data.result?.email);
     } catch (error) {

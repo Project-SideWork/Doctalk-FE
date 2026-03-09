@@ -7,26 +7,25 @@ const UserIdCard = () => {
   const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
 
-  const getUserIdInfo = async () => {
-    try {
-      const res = await axiosInstanceNoHeader.get("/mypage/user", {
-        params: {
-          Authorization: localStorage.getItem("accesToken"), // Assuming userId is stored in localStorage
-        },
-      });
-      setUserInfo(res.data.result);
-      localStorage.setItem("userName", userInfo);
-      return res;
-    } catch (error) {
-      console.log("유저 정보 가져오기 실패~!\n", error);
-      return error;
-    }
-  };
-
   useEffect(() => {
-    getUserIdInfo();
-  }, []);
+    const fetchUser = async () => {
+      try {
+        const res = await axiosInstanceNoHeader.get("/mypage/user", {
+          params: {
+            Authorization: localStorage.getItem("accessToken"),
+          },
+        });
 
+        const result = res?.data?.result ?? null;
+        setUserInfo(result);
+        if (result?.name) localStorage.setItem("userName", result.name);
+      } catch (error) {
+        console.log("유저 정보 가져오기 실패~!\n", error);
+      }
+    };
+
+    fetchUser();
+  }, []);
   return (
     <div className="w-60 h-[100] p-3.5 bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-gray-200 flex flex-col justify-start items-center gap-2.5 overflow-hidden">
       <div className=" w-full flex justify-start items-center gap-2">
